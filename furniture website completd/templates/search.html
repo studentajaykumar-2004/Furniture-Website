@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="search-results-section" data-aos="fade-up">
+  <h2 style="text-align:center; color:#ffcc00;">Search Results</h2>
+
+  {% if products %}
+    <div class="grid">
+      {% for p in products %}
+        <div class="card" data-aos="zoom-in">
+          <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+          <div class="card-body">
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.desc }}</p>
+            <p class="price">₹{{ p.price }}</p>
+            <a href="/product/{{ p.id }}" class="view-btn">View</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p style="text-align:center; margin-top:20px;">❌ No products found for your search.</p>
+  {% endif %}
+</section>
+
+{% endblock %}

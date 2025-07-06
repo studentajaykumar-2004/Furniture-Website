@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- About Hero Banner -->
+<section class="about-hero" data-aos="fade-in">
+  <div class="about-hero-overlay">
+    <h1>About <span>MyFurniture</span></h1>
+    <p>Your dream space, our crafted furniture.</p>
+  </div>
+</section>
+
+<!-- About Content Section -->
+<section class="about-section" data-aos="fade-up">
+  <div class="about-container">
+    <div class="about-image" data-aos="zoom-in">
+      <img src="{{ url_for('static', filename='images/aboutimage.jpg') }}" alt="About Image">
+    </div>
+    <div class="about-text">
+      <p>
+        Welcome to <strong>MyFurniture</strong>, your trusted destination for stylish, comfortable, and high-quality furniture. 
+        We offer a wide range of products made from wood, plastic, leather, glass, and fabric, catering to all your furnishing needs.
+      </p>
+      <p>
+        Whether you're upgrading your home, office, or any space – we provide options that blend design and durability.
+        Our team is committed to delivering value and satisfaction to every customer.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Product Details Section -->
+<main class="product-detail-section" data-aos="fade-up">
+  <div class="product-detail-container">
+
+    <!-- Product Image -->
+    <div class="product-image">
+      <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p class="product-desc">{{ product.desc }}</p>
+      <p><strong>Type:</strong> {{ product.type }} | <strong>Material:</strong> {{ product.material }}</p>
+      <p class="product-price">₹{{ product.price }}</p>
+
+      <form action="{{ url_for('add_to_cart', id=product.id) }}" method="POST">
+      <input type="number" name="qty" value="1" min="1" />
+      <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- Related Products Section -->
+<section class="related-products-section" data-aos="fade-up">
+  <h2>You Might Also Like</h2>
+  <div class="grid related-products-grid">
+    {% for item in related %}
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}">
+        <div class="card-body">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.desc }}</p>
+          <p class="price">₹{{ item.price }}</p>
+          <a href="/product/{{ item.id }}" class="view-btn">View</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

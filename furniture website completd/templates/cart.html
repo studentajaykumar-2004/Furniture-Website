@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="cart-page" data-aos="fade-up">
+  <h2 class="section-title">🛒 Your Cart</h2>
+
+  {% if items %}
+    <!-- Cart Table -->
+    <div class="cart-table-wrapper">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>
+              <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" class="cart-img">
+            </td>
+            <td>{{ item.name }}</td>
+            <td>₹{{ item.price }}</td>
+            <td>{{ item.qty }}</td>
+            <td><strong>₹{{ item.subtotal }}</strong></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Total Section -->
+    <div class="cart-total" data-aos="fade-left">
+      <h3>Total: ₹{{ total }}</h3>
+      <a href="{{ url_for('place_order') }}" class="place-order-btn">Place Order</a>
+    </div>
+  {% else %}
+    <!-- Empty Cart Message -->
+    <p class="empty-cart-message">
+      Your cart is empty. <a href="{{ url_for('home') }}">Start Shopping</a>
+    </p>
+  {% endif %}
+</main>
+{% endblock %}

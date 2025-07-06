@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 style="text-align:center; margin-top: 30px; font-size: 2.2rem; color: #004d40;" data-aos="fade-down">
+  Meet Our Team
+</h2>
+
+<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:40px;">
+
+  {% set members = [
+    {'name': 'Ayushman Patnaik', 'role': 'Frontend Developer'},
+    {'name': 'Asutosh Patra', 'role': 'UI Designer'},
+    {'name': 'Chandra Sekhar Sahu', 'role': 'System Designer'},
+    {'name': 'K Ajay Kumar', 'role': 'UI Designer'},
+    {'name': 'Subham Panigrahy', 'role': 'Backend Developer'}
+  ] %}
+
+  {% for member in members %}
+  <div class="team-card" data-aos="zoom-in">
+    <div class="team-content">
+      <h3>{{ member.name }}</h3>
+      <p>{{ member.role }}</p>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

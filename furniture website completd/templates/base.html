@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velvet Vogue - Furniture Store</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Welcome Screen (Portrait with logo & text) -->
+  <div id="welcome-screen">
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo" id="welcome-logo" />
+    <div class="welcome-content">
+      <h1>Welcome to <span>Velvet Vogue</span></h1>
+      <p>Explore stylish and quality furniture for your dream home</p>
+    </div>
+  </div>
+
+  <!-- ✅ Header / Navbar with Login/Signup -->
+  <header>
+    <div class="nav-container" data-aos="fade-down">
+      <div class="logo">
+        <a href="/" style="text-decoration: none; color: white;">Velvet <span style="color: #6684bb;">Vogue</span>.</a>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a>
+        <a href="/new-arrival">New Arrival</a>
+        <a href="/about">About</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/contact">Contact</a>
+
+        {% if session.get('user_name') %}
+          <span style="color: white; margin-left: 15px;"><i class="fas fa-user"></i> {{ session['user_name'] }}</span>
+          <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="{{ url_for('signup') }}"><i class="fas fa-user-plus"></i> Signup</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Page Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer data-aos="fade-up">
+    <div class="footer-top">
+      <div class="newsletter">
+        <h3>Subscribe To Newsletter</h3>
+        <form>
+          <input type="email" placeholder="Your email" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <h4>Velvet <span style="color: #c9ce2a;">Vogue</span></h4>
+        <p>Your trusted partner for elegant and modern furniture solutions.</p>
+        <div class="social-icons">
+          <i>📘</i> <i>🐦</i> <i>📸</i>
+        </div>
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li>Product</li>
+          <li>Help & Support</li>
+          <li>Pricing</li>
+          <li>FAQ</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li>Sofas</li>
+          <li>Chairs</li>
+          <li>Dining Tables</li>
+          <li>Beds</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p>India, Odisha</p>
+        <p>+91 9876543210</p>
+        <p>furniture@velvetvogue.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Welcome Screen Logic (Show only once per session)
+    document.addEventListener("DOMContentLoaded", function () {
+      const welcomeScreen = document.getElementById("welcome-screen");
+      const alreadyShown = sessionStorage.getItem("welcomeShown");
+
+      if (alreadyShown) {
+        welcomeScreen.style.display = "none";
+      } else {
+        welcomeScreen.style.display = "flex";
+        setTimeout(() => {
+          welcomeScreen.classList.add("hide");
+          sessionStorage.setItem("welcomeShown", "true");
+        }, 3000); // Show for 3 seconds
+      }
+    });
+  </script>
+</body>
+</html>

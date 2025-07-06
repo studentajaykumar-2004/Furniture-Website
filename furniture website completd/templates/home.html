@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section" data-aos="fade-in">
+  <img src="{{ url_for('static', filename='images/frontimage.jpg') }}" alt="Front" class="hero-img">
+  <div class="hero-text">
+    <h1>Make <span>Your Comfort</span> Is Our <span>Happiness</span></h1>
+    <p>Explore our premium furniture collection designed for elegance and comfort.</p>
+    <a href="#products" class="hero-btn">Shop Now</a>
+  </div>
+</section>
+
+<!-- 🪑 Shop by Categories Section -->
+<section class="categories-section" data-aos="fade-up">
+  <h2 style="text-align: center; margin-top: 60px; color: #ffcc00;">Shop by Categories</h2>
+  <div class="categories-grid">
+
+    <!-- Each card links to a category page -->
+    <a href="/category/sofa" class="category-card">
+      
+      <h3>Sofas</h3>
+    </a>
+
+    <a href="/category/chair" class="category-card">
+      
+      <h3>Chairs</h3>
+    </a>
+
+    <a href="/category/mattress" class="category-card">
+      
+      <h3>Mattress</h3>
+    </a>
+
+    <a href="/category/table" class="category-card">
+      
+      <h3>Tables</h3>
+    </a>
+
+    <a href="/category/lighting" class="category-card">
+      
+      <h3>Lighting</h3>
+    </a>
+
+    <a href="/category/room" class="category-card">
+      
+      <h3>Rooms</h3>
+    </a>
+
+    <a href="/category/decor" class="category-card">
+      
+      <h3>Decor</h3>
+    </a>
+
+    <a href="/category/bed" class="category-card">
+      
+      <h3>Beds</h3>
+    </a>
+
+  </div>
+</section>
+
+<!-- Products Section -->
+<main id="products" class="products-section" data-aos="fade-up">
+  <h2>Explore Our Products</h2>
+
+  <!-- Search Bar -->
+  <form method="get" action="/search" class="search-bar">
+    <input type="text" name="search" placeholder="Search products...">
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Product Grid -->
+<div class="grid">
+  {% if not products %}
+  <p style="text-align: center; color: red; font-weight: bold; font-size: 18px;">
+    No products found for "{{ search }}"
+  </p>
+  {% endif %}
+
+  {% for p in products %}
+    <div class="card" data-aos="zoom-in">
+      <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+      <div class="card-body">
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.desc }}</p>
+        <p class="price">₹{{ p.price }}</p>
+        <a href="/product/{{ p.id }}" class="view-btn">View</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+<!-- Smooth Scroll Script -->
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
+</script>
+
+{% endblock %}  

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="success-page" data-aos="fade-up">
+  <h1 class="success-title">🎉 Order Placed Successfully!</h1>
+  <p class="success-message">Thank you for shopping with us. Your order has been received and is being processed.</p>
+
+  <div class="success-buttons">
+    <a href="{{ url_for('home') }}" class="success-btn">Go to Home</a>
+    <a href="{{ url_for('shop') }}" class="success-btn alt">Shop More</a>
+  </div>
+</main>
+
+{% endblock %}

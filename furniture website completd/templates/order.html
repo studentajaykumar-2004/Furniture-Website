@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main style="padding: 60px 20px; max-width: 1000px; margin: auto;" data-aos="fade-up">
+
+  <h2 style="text-align: center; color: #004d40; font-size: 2rem; margin-bottom: 30px;">🛒 Complete Your Order</h2>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center;">
+
+    <!-- Left: Order Summary -->
+    <div style="flex: 1; min-width: 280px; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.08);" data-aos="fade-right">
+      <h3 style="color: #004d40;">Order Summary</h3>
+      <ul style="list-style: none; padding: 0; margin-top: 20px;">
+        {% for item in items %}
+        <li style="margin-bottom: 10px; font-size: 1rem; color: #444;">
+          {{ item.name }} × {{ item.qty }} = ₹{{ item.subtotal }}
+        </li>
+        {% endfor %}
+      </ul>
+      <p style="font-weight: bold; font-size: 1.1rem; color: #333; margin-top: 10px;">Total: ₹{{ total }}</p>
+    </div>
+
+    <!-- Right: Shipping Form -->
+    <div style="flex: 1; min-width: 280px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.08);" data-aos="fade-left">
+      <h3 style="color: #004d40;">Shipping Information</h3>
+
+      {% if form %}
+      <!-- Flask-WTF Form -->
+      <form method="post" style="margin-top: 20px;">
+        {{ form.hidden_tag() }}
+
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;">{{ form.name.label }}</label><br>
+          {{ form.name(size=40, class_='form-input', style='color: #000;') }}
+          {% for error in form.name.errors %}
+            <span style="color: red; font-size: 0.9rem;">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;">{{ form.phone.label }}</label><br>
+          {{ form.phone(size=40, class_='form-input', style='color: #000;') }}
+          {% for error in form.phone.errors %}
+            <span style="color: red; font-size: 0.9rem;">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;">{{ form.address.label }}</label><br>
+          {{ form.address(cols=40, rows=4, class_='form-input', style='color: #000;') }}
+          {% for error in form.address.errors %}
+            <span style="color: red; font-size: 0.9rem;">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <button type="submit" style="padding: 12px 24px; background-color: #004d40; color: white; border: none; border-radius: 4px; cursor: pointer;">
+          Place Order
+        </button>
+      </form>
+      {% else %}
+      <!-- Fallback Manual Form -->
+      <form method="post" style="margin-top: 20px;">
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;" for="name">Name:</label><br>
+          <input type="text" name="name" class="form-input" size="40" required style="color: #000;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;" for="phone">Phone:</label><br>
+          <input type="text" name="phone" class="form-input" size="40" required style="color: #000;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="color: #333;" for="address">Address:</label><br>
+          <textarea name="address" class="form-input" cols="40" rows="4" required style="color: #000;"></textarea>
+        </div>
+
+        <button type="submit" style="padding: 12px 24px; background-color: #004d40; color: white; border: none; border-radius: 4px; cursor: pointer;">
+          Place Order
+        </button>
+      </form>
+      {% endif %}
+    </div>
+
+  </div>
+
+</main>
+
+{% endblock %}

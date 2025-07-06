@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- New Arrival Hero Section -->
+<section class="hero-section" data-aos="fade-down">
+  <div class="hero-text center-text">
+    <h1 class="section-title">✨ New Arrivals</h1>
+    <p class="section-subtitle">Discover the newest additions to our premium furniture collection.</p>
+  </div>
+</section>
+
+<!-- New Arrivals Product Grid -->
+<main class="products-section" data-aos="fade-up">
+  <div class="grid">
+    {% for p in products %}
+      <div class="card" data-aos="zoom-in">
+        <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+        <div class="card-body">
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.desc }}</p>
+          <p class="price">₹{{ p.price }}</p>
+          <a href="/product/{{ p.id }}" class="view-btn">View</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+
+{% endblock %}

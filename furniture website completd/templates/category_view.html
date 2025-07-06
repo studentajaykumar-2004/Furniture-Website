@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="category-section" data-aos="fade-up">
+
+  <!-- Centered Colored Heading -->
+  <h2 style="text-align: center; margin-top: 40px; color: #ffcc00;">
+    {{ category }} Collection
+  </h2>
+
+  {% if products %}
+    <div class="grid">
+      {% for p in products %}
+        <div class="card" data-aos="zoom-in">
+          <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+          <div class="card-body">
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.desc }}</p>
+            <p class="price">₹{{ p.price }}</p>
+            <a href="/product/{{ p.id }}" class="view-btn">View</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p style="text-align: center; margin-top: 20px;">No products found in this category.</p>
+  {% endif %}
+</section>
+
+{% endblock %}

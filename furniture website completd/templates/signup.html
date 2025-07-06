@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="floating-bg">
+  <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center w-100">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow p-4 animated-border-card" style="background-color: rgb(39, 39, 39); border-radius: 10px;">
+
+          <h2 class="login-signup-heading text-center text-white mb-4">Create an account</h2>
+
+          <!-- Flash Messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} text-center" role="alert">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <form method="POST">
+            <div class="mb-3">
+              <label class="form-label text-white">Name</label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-white">Email</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-white">Password</label>
+              <input type="password" name="password" class="form-control" required minlength="6">
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-gradient btn-sm w-50" type="submit" style="font-size: 18px;">Sign Up</button>
+            </div>
+          </form>
+
+          <p class="login-signup-info text-center mt-4 text-white">
+            Already have an account?
+            <a class="login-sigup-anchor" href="{{ url_for('login') }}">Login here</a>
+          </p>
+
+        </div>
+        <br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
